@@ -7,3 +7,9 @@ void showSnackBar(BuildContext context, String content) {
     ),
   );
 }
+
+String getNameFromEmail(String email) {
+  //SuryanshJaiswal@gmail.com
+  // LIST  = [SuryanshJaiswal, gmail.com]
+  return email.split("@")[0];
+}
