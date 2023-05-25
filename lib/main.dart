@@ -5,7 +5,6 @@ import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:twitter_clone/features/auth/view/signup_view.dart';
 import 'package:twitter_clone/features/home/view/home_view.dart';
 import 'package:twitter_clone/theme/theme.dart';
-
 import 'common/error_page.dart';
 
 void main() {
@@ -22,7 +21,7 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.theme,
       home: ref.watch(currentUserAccountProvider).when(
             data: (user) {
-              // if (user != null) return const HomeView();
+              if (user != null) return const HomeView();
               return const SignUpView();
             },
             error: (error, st) => ErrorPage(error: error.toString()),
