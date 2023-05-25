@@ -1,0 +1,65 @@
+diff a/lib/features/home/view/home_view.dart b/lib/features/home/view/home_view.dart	(rejected hunks)
+@@ -1,6 +1,6 @@
+ import 'package:flutter/cupertino.dart';
+ import 'package:flutter/material.dart';
+-import 'package:flutter_svg/svg.dart';
++import 'package:fpdart/fpdart.dart' as fp;
+ import 'package:twitter_clone/constants/constants.dart';
+ import 'package:twitter_clone/theme/pallete.dart';
+ 
+@@ -29,42 +29,24 @@ class _HomeViewState extends State<HomeView> {
+       appBar: appBar,
+       body: IndexedStack(
+         index: _page,
+-        children: UIConstants.bottomTabBarPages,
++        children: UIConstants.tabBarRoutes.map((r) => r.routeName).toList(),
+       ),
+       floatingActionButton: FloatingActionButton(
+         onPressed: () {},
+-        child: const Icon(
+-          Icons.add,
+-          size: 28,
+-        ),
++        child: const Icon(Icons.add, size: 28),
+       ),
+       bottomNavigationBar: CupertinoTabBar(
+-          currentIndex: _page,
+-          onTap: onPageChanged,
+-          backgroundColor: Pallete.backgroundColor,
+-          items: [
+-            BottomNavigationBarItem(
+-              icon: SvgPicture.asset(
+-                  _page == 0
+-                      ? AssetsConstants.homeFilledIcon
+-                      : AssetsConstants.homeOutlinedIcon,
+-                  color: Pallete.whiteColor),
+-            ),
+-            BottomNavigationBarItem(
+-              icon: SvgPicture.asset(
+-                  _page == 1
+-                      ? AssetsConstants.searchIcon
+-                      : AssetsConstants.searchIcon,
+-                  color: Pallete.whiteColor),
+-            ),
+-            BottomNavigationBarItem(
+-              icon: SvgPicture.asset(
+-                  _page == 2
+-                      ? AssetsConstants.notifFilledIcon
+-                      : AssetsConstants.notifOutlinedIcon,
+-                  color: Pallete.whiteColor),
+-            ),
+-          ]),
++        currentIndex: _page,
++        onTap: onPageChanged,
++        backgroundColor: Pallete.backgroundColor,
++        items: UIConstants.tabBarRoutes
++            .mapWithIndex(
++              (r, i) => BottomNavigationBarItem(
++                icon: r.getIcon(page: _page, index: i),
++              ),
++            )
++            .toList(),
++      ),
+     );
+   }
+ }
